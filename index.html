@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caleb's Library</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="library-info">
+        <h1>Caleb's Library</h1>
+        <h2>All the best reads!</h2>
+        <button>add a book</button>
+    </div>
+    
+
+    <div class="book-container">
+        
+    </div>
+
+
+    <script>
+        const myLibrary = [];
+
+        function Book(title, author, pages, readStatus) {
+            this.title = title;
+            this.author = author;
+            this.pages = pages;
+            this.readStatus = readStatus;
+            this.info = function() {
+                return(`${this.title} by ${this.author} has ${this.pages} and you have ${this.readStatus} it`);
+            }
+        }
+
+        function addBookToLibrary(title, author, pages, readStatus) {
+            const book = new Book(title, author, pages, readStatus)
+            myLibrary.push(book);
+        }
+
+        addBookToLibrary("The Hobbit", "J.R. Tolkien", "295 Pages", "not read");
+        addBookToLibrary("The Hobbit", "J.R. Tolkien", "295 Pages", "not read");
+        addBookToLibrary("The Hobbit", "J.R. Tolkien", "295 Pages", "not read");
+
+        const bookContainer = document.querySelector(".book-container") // Create a reference to the book container class
+
+        function createLibrary() { // Iterate through entire myLibrary array and make book objects
+            for (let i=0; i<myLibrary.length; i++) {
+                const book = document.createElement('div');
+                book.classList.add("book");
+                bookContainer.appendChild(book);
+                const titleText = document.createElement("h2");
+                book.appendChild(titleText);
+                const authorText = document.createElement("h3");
+                book.appendChild(authorText);
+                const pagesText = document.createElement("h3");
+                book.appendChild(pagesText);
+                const readStatusText = document.createElement("h3");
+                book.appendChild(readStatusText);
+
+                titleText.textContent = myLibrary[i].title;
+                authorText.textContent = myLibrary[i].author;
+                pagesText.textContent = myLibrary[i].pages;
+                readStatusText.textContent = myLibrary[i].readStatus;
+
+            }
+        }
+
+        createLibrary();
+    </script>
+    
+</body>
+</html>
