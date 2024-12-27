@@ -38,20 +38,19 @@
                     <legend>Have You Read This Book Yet?</legend>
 
                     <div>
-                        <input type="radio" id="read-status-yes">
+                        <input type="radio" id="read-status-yes" name="read-status" value="yes">
                         <label for="read-status-yes">Yes</label>
                     </div>
 
                     <div>
-                        <input type="radio" id="read-status-no">
+                        <input type="radio" id="read-status-no" name="read-status" value="no">
                         <label for="read-status-no">No</label>
                     </div>
-
                     
                 </fieldset>
                 
 
-                <button>Add Book</button>
+                <button class="add-book-button">Add Book</button>
 
 
             </form>
@@ -124,6 +123,37 @@
             bookForm.close();
         });
 
+        const addBookButton = document.querySelector(".add-book-button");
+
+        addBookButton.addEventListener("click", () => { // take and interpret the user's inputs
+            const titleInput = document.querySelector("#title");
+            const bookTitle = titleInput.value;
+
+            const authorInput = document.querySelector("#author");
+            const bookAuthor = authorInput.value;
+
+            const pagesInput = document.querySelector("#pages");
+            const bookPages = pagesInput.value;
+
+            const statusYesInput = document.querySelector("#read-status-yes");
+            const statusNoInput = document.querySelector("#read-status-no");
+
+            let readStatus;
+
+            if (statusYesInput.checked) {
+                readStatus = "read";
+            } else {
+                readStatus = "not read";
+            }
+
+            addBookToLibrary(bookTitle, bookAuthor, bookPages, readStatus);
+
+            createLibrary();
+
+            bookForm.close();
+
+            event.preventDefault(); // stops the button from trying to post data
+        });
         
     </script>
 
