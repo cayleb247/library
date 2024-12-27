@@ -29,6 +29,11 @@ button {
 .book-container {
     grid-row: 2/3;
     display: grid;
+    box-sizing: border-box;
+    padding: 0 8rem 0 8rem;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, 12rem);
+    grid-template-rows: repeat(auto-fill, 15rem);
 }
 
 .book {
@@ -52,5 +57,23 @@ button {
 }
 
 svg {
-    margin-bottom: 1rem
+    margin-bottom: 1rem;
+}
+
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+
+
+
+}
+
+::backdrop {
+    background-image: black;
+    opacity: 50%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
 }

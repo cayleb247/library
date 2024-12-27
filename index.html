@@ -7,17 +7,59 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    
     <div class="library-info">
         <h1>Caleb's Library</h1>
         <h2>All the best reads!</h2>
-        <button>add a book</button>
+        <button class="open-button">add a book</button>
     </div>
     
 
     <div class="book-container">
-        
     </div>
 
+
+
+
+    <dialog id="book-form">
+        <div class="dialog-content">
+            <button class="close-button">Close</button>
+            <h2>Add a Book</h2>
+            <form action="POST">
+                <label for="title">Title</label>
+                <input type="text" id="title">
+                <label for="title">Author</label>
+                <input type="text" id="author">
+                <label for="title">Number of Pages</label>
+                <input type="text" id="pages">
+            
+                <fieldset>
+                    <legend>Have You Read This Book Yet?</legend>
+
+                    <div>
+                        <input type="radio" id="read-status-yes">
+                        <label for="read-status-yes">Yes</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="read-status-no">
+                        <label for="read-status-no">No</label>
+                    </div>
+
+                    
+                </fieldset>
+                
+
+                <button>Add Book</button>
+
+
+            </form>
+        </div>
+    </dialog>
+
+
+    
 
     <script>
         const myLibrary = [];
@@ -48,6 +90,7 @@
                 const book = document.createElement('div');
                 book.classList.add("book");
                 bookContainer.appendChild(book);
+                book.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>'
                 const titleText = document.createElement("h2");
                 book.appendChild(titleText);
                 const authorText = document.createElement("h3");
@@ -66,7 +109,25 @@
         }
 
         createLibrary();
+
+        const bookForm = document.querySelector("#book-form")
+
+        console.log(bookForm);
+
+        const openButton = document.querySelector('.open-button');
+        openButton.addEventListener("click", () => {
+            bookForm.showModal();
+        });
+
+        const closeButton = document.querySelector('.close-button');
+        closeButton.addEventListener("click", () => {
+            bookForm.close();
+        });
+
+        
     </script>
+
+    
     
 </body>
 </html>
