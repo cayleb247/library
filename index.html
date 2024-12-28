@@ -50,7 +50,7 @@
                 </fieldset>
                 
 
-                <button class="add-book-button">Add Book</button>
+                <button class="add-book-button" type="submit">Add Book</button>
 
 
             </form>
@@ -61,9 +61,9 @@
     
 
     <script>
-        const myLibrary = [];
+        const myLibrary = []; // List of every book object
 
-        function Book(title, author, pages, readStatus) {
+        function Book(title, author, pages, readStatus) { // book object constructor
             this.title = title;
             this.author = author;
             this.pages = pages;
@@ -73,14 +73,10 @@
             }
         }
 
-        function addBookToLibrary(title, author, pages, readStatus) {
+        function addBookToLibrary(title, author, pages, readStatus) { // creates a book and adds it to myLibrary
             const book = new Book(title, author, pages, readStatus)
             myLibrary.push(book);
         }
-
-        addBookToLibrary("The Hobbit", "J.R. Tolkien", "295 Pages", "not read");
-        addBookToLibrary("The Hobbit", "J.R. Tolkien", "295 Pages", "not read");
-        addBookToLibrary("The Hobbit", "J.R. Tolkien", "295 Pages", "not read");
 
         const bookContainer = document.querySelector(".book-container") // Create a reference to the book container class
 
@@ -98,20 +94,42 @@
                 book.appendChild(pagesText);
                 const readStatusText = document.createElement("h3");
                 book.appendChild(readStatusText);
-
+                const delButton = document.createElement("button");
+                book.appendChild(delButton);
+                
+                // Add book info to each element
                 titleText.textContent = myLibrary[i].title;
                 authorText.textContent = myLibrary[i].author;
-                pagesText.textContent = myLibrary[i].pages;
+                pagesText.textContent = `${myLibrary[i].pages} Pages` ;
                 readStatusText.textContent = myLibrary[i].readStatus;
 
-            }
+                delButton.textContent = "Delete Book";
+                delButton.classList.add("del-button"); // use class for button styling
+
+            };
+
+            // Add functionality to every delete button
+
+            const delButtonList = document.querySelectorAll(".del-button"); // list of every delete button
+                
+                for (let i=0;i<delButtonList.length; i++) {
+                    delButtonList[i].addEventListener("click", () => {
+                        myLibrary.splice(i, 1);
+                        bookContainer.innerHTML = "";
+                        createLibrary();
+                    });
+                };
         }
 
-        createLibrary();
+        // STARTING BOOKS
+        addBookToLibrary("The Hobbit", "J.R. Tolkien", "295", "not read");
+        addBookToLibrary("Twilight", "Stephenie Meyer", "544", "read");
+        addBookToLibrary("Animal Farm", "George Orwell", "92", "read");
+
+
+        createLibrary(); // creates the starting book objects
 
         const bookForm = document.querySelector("#book-form")
-
-        console.log(bookForm);
 
         const openButton = document.querySelector('.open-button');
         openButton.addEventListener("click", () => {
@@ -148,13 +166,14 @@
 
             addBookToLibrary(bookTitle, bookAuthor, bookPages, readStatus);
 
-            createLibrary();
+            bookContainer.innerHTML = ""; // delete every book in DOM
+            createLibrary(); // create library with new book added
 
             bookForm.close();
 
             event.preventDefault(); // stops the button from trying to post data
         });
-        
+
     </script>
 
     
