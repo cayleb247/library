@@ -94,6 +94,10 @@
                 book.appendChild(pagesText);
                 const readStatusText = document.createElement("h3");
                 book.appendChild(readStatusText);
+
+                // delete and read buttons
+                const readButton = document.createElement("button");
+                book.appendChild(readButton);
                 const delButton = document.createElement("button");
                 book.appendChild(delButton);
                 
@@ -106,6 +110,8 @@
                 delButton.textContent = "Delete Book";
                 delButton.classList.add("del-button"); // use class for button styling
 
+                readButton.textContent = "Toggle Read";
+                readButton.classList.add("toggle-button");
             };
 
             // Add functionality to every delete button
@@ -115,6 +121,23 @@
                 for (let i=0;i<delButtonList.length; i++) {
                     delButtonList[i].addEventListener("click", () => {
                         myLibrary.splice(i, 1);
+                        bookContainer.innerHTML = "";
+                        createLibrary();
+                    });
+                };
+
+            // Add functionality to every 'mark as read' button
+
+            const readButtonList = document.querySelectorAll(".toggle-button"); // list of every delete button
+                
+                for (let i=0;i<readButtonList.length; i++) {
+                    readButtonList[i].addEventListener("click", () => {
+                        console.log(myLibrary[i].readStatus);
+                        if (myLibrary[i].readStatus != "read") {
+                            myLibrary[i].readStatus = "read";
+                        } else {
+                            myLibrary[i].readStatus = "not read";
+                        }
                         bookContainer.innerHTML = "";
                         createLibrary();
                     });
@@ -160,8 +183,10 @@
 
             if (statusYesInput.checked) {
                 readStatus = "read";
-            } else {
+            } else if (statusNoInput.checked) {
                 readStatus = "not read";
+            } else {
+                readStatus = "N/A";
             }
 
             addBookToLibrary(bookTitle, bookAuthor, bookPages, readStatus);
@@ -171,6 +196,15 @@
 
             bookForm.close();
 
+            // reset user inputs
+
+            titleInput.value = "";
+            authorInput.value = "";
+            pagesInput.value = "";
+
+            statusYesInput.checked = false;
+            statusNoInput.checked = false;
+            
             event.preventDefault(); // stops the button from trying to post data
         });
 

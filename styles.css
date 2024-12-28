@@ -57,13 +57,15 @@ button {
 }
 
 svg {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 dialog {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    border: 0.25rem solid black;
+    border-radius: 0.5rem;
 }
 
 .dialog-content {
@@ -74,8 +76,30 @@ dialog {
 
 }
 
-::backdrop {
-    background-image: black;
+.dialog-content button {
+    color: white;
+    background-color: black;
+    opacity: 80%;
+    border: 0;
+    border-radius: 1rem;
+    padding: .5rem 2rem .5rem 2rem;
+    margin: 0;
+}
+
+.dialog-content h2, label, fieldset {
+    margin-top: 0.5rem;
+}
+
+.dialog-content fieldset {
+    margin-bottom: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+}
+
+dialog::backdrop {
+    background-color: black;
     opacity: 50%;
 }
 
@@ -84,13 +108,17 @@ form {
     flex-direction: column;
 }
 
-.add-book-button {
-    
+.open-button {
+    background-color: rgb(220, 220, 220);
+    color:rgb(130, 130, 130);
+    border: 0;
+    border-radius: 2rem;
+    padding: .5rem;
 }
 
-.del-button {
+.del-button, .toggle-button {
     background-color: white;
     border: 0;
     border-radius: 1rem;
-    padding: .5rem;
+    padding: .5rem 2rem .5rem 2rem;
 }
