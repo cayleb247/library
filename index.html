@@ -63,14 +63,18 @@
     <script>
         const myLibrary = []; // List of every book object
 
-        function Book(title, author, pages, readStatus) { // book object constructor
-            this.title = title;
-            this.author = author;
-            this.pages = pages;
-            this.readStatus = readStatus;
-            this.info = function() {
-                return(`${this.title} by ${this.author} has ${this.pages} and you have ${this.readStatus} it`);
+        class Book {
+
+            constructor(title, author, pages, readStatus) {
+                this.title = title;
+                this.author = author;
+                this.pages = pages;
+                this.readStatus = readStatus;
             }
+
+            info() {
+                return(`${this.title} by ${this.author} has ${this.pages} and you have ${this.readStatus} it`);
+                }
         }
 
         function addBookToLibrary(title, author, pages, readStatus) { // creates a book and adds it to myLibrary
